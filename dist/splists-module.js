@@ -2,6 +2,10 @@
     'use strict';
     angular.module('splists', []);
 
+
+    /*
+        S H A R E P O I N T   L I S T    D I R E C T I V E 
+    */
     angular.module('splists').directive('splist', splist);
     splist.inject = ['$http', '$sce'];
     function splist($http, $sce) {
@@ -38,6 +42,8 @@
                 if (lookupId) {
                     $scope.nextUrl = null;
                     let filter = $attrs.lookupField + "/Id eq " + lookupId;
+
+
                     getItems(filter);
                 }
             });
@@ -62,7 +68,10 @@
             page: 1
         };
 
-        function getItems(filter) {
+        function getItems(filter, deferred) {
+            var deferred = $q.defer();
+            $scope.promise = deferred.promise;
+            
             spListsFactory.getItemsWithLookups($attrs.siteUrl, $attrs.listTitle, $attrs.viewTitle, $attrs.pageSize, filter)
                 .then(function (results) {
                     $scope.items = results.items;
@@ -70,18 +79,23 @@
                     $scope.viewFields = results.viewFields;
                     $scope.itemForm = results.itemForm;
                     $scope.columnDefs = getColumnDefs($scope.viewFields);
+                    deferred.resolve();
                 });
         }
 
         function getNextBatchOfItems() {
+            var deferred = $q.defer();
+            $scope.promise = deferred.promise;
             if (!$scope.nextUrl) {
                 console.log('no more items left');
+                deferred.resolve();
                 return;
             }
             spListsFactory.getNextItems($scope.nextUrl, $scope.viewFields)
                 .then(function (results) {
                     $scope.items = $scope.items.concat(results.items);
                     $scope.nextUrl = results.nextUrl;
+                    deferred.resolve();
                 });
         }
 
@@ -112,8 +126,9 @@
     }
 
 
-
-    ///Select directive/////////////////////////////
+    /*
+        S E L E C T   D I R E C T I V E 
+    */
     angular.module('splists').directive('listItemSelect', listItemSelect);
     listItemSelect.inject = ['$http'];
     function listItemSelect($http) {
@@ -145,7 +160,6 @@
         spListsFactory.getAllItems(vm.siteUrl, vm.listTitle)
             .then(function (items) {
                 vm.items = items;
-                console.log(vm.items);
             });
 
         vm.querySearch = function (searchText) {
