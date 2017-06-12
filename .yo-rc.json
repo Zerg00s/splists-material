@@ -1,0 +1,10 @@
+{
+  "generator-sppp": {
+    "app.name": "splists-material",
+    "sppp.version": "2.1.0",
+    "app.description": "playground",
+    "app.author": "Denis Molodtsov",
+    "conf.spFolder": "_catalogs/masterpage/material",
+    "conf.distFolder": "./dist"
+  }
+}

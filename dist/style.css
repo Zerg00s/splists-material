@@ -1,0 +1,42 @@
+html, body{
+    /*background-color: #BADA55;*/
+    font-family: 'Roboto', sans-serif;
+    font-size:14px;
+    height:100%;
+    margin: 0px;
+    padding: 0px;
+}
+
+md-toolbar h1{
+    font-size:1.250em;
+    font-weight: 400;
+    margin:auto;
+}
+
+.center{
+    text-align: center;
+}
+
+.bg-red{
+    background-color:brown;
+}
+.bg-blue{
+    background-color: darkblue;
+}
+.bg-black{
+    background-color: black;
+}
+.bg-green{
+    background-color: darkgreen;
+}
+.bg-yellow{
+    background-color: gold;
+}
+
+.slide-animate, .slide-animate.ng-enter-active{
+    transition: 0.3s ease-in-out;
+}
+
+.slide-animate.ng-enter{
+    transform: translate(-100%, 0);
+}

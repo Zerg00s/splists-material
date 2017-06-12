@@ -1,0 +1,14 @@
+<md-autocomplete style='color:black' flex style='display:inline-block' md-selected-item="vm.selectedItem" md-search-text="vm.searchText"
+    md-items="item in vm.querySearch(vm.searchText)" md-item-text="item.Title" md-itemchange="vm.md-selected-item-change=(item)"
+    md-min-length="0" placeholder="Pick a Client">
+
+    <!--md-items="item in vm.items" -->
+    <md-item-template>
+        <div class="item-name" style="display: flex; align-items: center;">
+            <i class="material-icons">business</i>
+            <span> {{item.Title}} </span>
+            <div><small>{{item.ID}}</small></div>
+
+        </div>
+    </md-item-template>
+</md-autocomplete>

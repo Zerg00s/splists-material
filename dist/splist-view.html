@@ -1,0 +1,21 @@
+ 
+    
+
+<md-toolbar md-component-id='listToolBar' class="md-toolbar-tools">
+   <h4><a ng-href='{{vm.siteUrl + vm.listTitle}}' target='_blank'>{{vm.listTitle}} ||  {{vm.viewTitle}}</a> </h4>
+</md-toolbar>
+
+<md-list flex>
+    <md-subheader class="md-no-sticky"> {{vm.listTitle}}</md-subheader>
+    <md-list-item class="md-3-line" ng-repeat="item in items" > <!-- ng-click="null"-->
+        <div class="md-list-item-text" layout="column">
+            <h3>{{ item.ID }}</h3>
+
+            <div ng-repeat='field in viewFields'>
+                {{ item[field.InternalName] }}
+            </div>
+        </div>
+    </md-list-item>
+</md-list>
+
+<button type="button" class="btn btn-primary" ng-click="getNextBatchOfItems()">Load more</button>
