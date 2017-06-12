@@ -1,0 +1,6 @@
+<ng-switch on="vm.field.TypeAsString">
+  <div ng-switch-when-separator="|" ng-switch-when="URL|Note|File|Computed">
+    <div style="word-wrap: normal; padding:10px" ng-bind-html="vm.item[vm.field.InternalName]"></div>
+  </div>
+  <div ng-switch-default>{{vm.item[vm.field.InternalName]}}</div>
+  </div>

@@ -54,6 +54,14 @@
             $window.open($scope.itemForm + "?ID=" + row.entity.ID, '_blank');
         }
 
+        $scope.selected = [];
+
+        $scope.query = {
+            order: 'ID',
+            limit: 5,
+            page: 1
+        };
+
         function getItems(filter) {
             spListsFactory.getItemsWithLookups($attrs.siteUrl, $attrs.listTitle, $attrs.viewTitle, $attrs.pageSize, filter)
                 .then(function (results) {
@@ -147,7 +155,7 @@
             }
             else {
                 vm.filteredItems = vm.items.filter(function (item) {
-                    
+
                     if (item.Title.toLowerCase().indexOf(searchText.toLowerCase()) != -1) {
                         return true;
                     }
@@ -159,8 +167,8 @@
             }
         }
 
-         vm.selectedItemChange = function (newItem) {
-         };
+        vm.selectedItemChange = function (newItem) {
+        };
 
         // $scope.$watch(() => vm.item.selected, function (newVal) {
         //     if (newVal) {
