@@ -14,7 +14,8 @@
             getViewFieldsRitch: getViewFieldsRitch,
             getItemsWithLookups: getItemsWithLookups,
             getNextItems: getNextItems,
-            getAllItems: getAllItems
+            getAllItems: getAllItems,
+            getViewUrl: getViewUrl
         };
 
         return listFactory;
@@ -284,8 +285,8 @@
                 var itemsUrl = concatUrls(siteUrl, '/_api/web/lists/');
                 itemsUrl = concatUrls(itemsUrl, "getByTitle('" + listTitle + "')/items");
                 itemsUrl = appendFieldSelectors(itemsUrl, viewFields);
-                itemsUrl += "&$top=" + pageSize.toString();               
-                
+                itemsUrl += "&$top=" + pageSize.toString();
+
                 if (filter) {
                     itemsUrl += "&$filter=" + filter;
                 }
@@ -330,7 +331,7 @@
         }
 
         function getAllItems(siteUrl, listTitle) {
-            var listItemsUrl = concatUrls(siteUrl, "/_api/web/lists/getByTitle('" + listTitle + "')/items");
+            var listItemsUrl = concatUrls(siteUrl, "/_api/web/lists/getByTitle('" + encodeURIComponent(listTitle) + "')/items");
             var listItems = [];
             var deferred = $q.defer();
             var getItemsUrl = {
@@ -359,6 +360,19 @@
             }
 
             return deferred.promise;
+        }
+
+        function getViewUrl(siteUrl, listTitle, viewTitle) {
+            var viewUrl = concatUrls(siteUrl, "/_api/web/lists/getByTitle('" + encodeURIComponent(listTitle) + "')/views/getByTitle('" + viewTitle + "')")
+            $log.info(viewUrl);
+            return $http({
+                url: viewUrl,
+                method: 'GET',
+                headers: { accept: 'application/json;odata=verbose' }
+            })
+                .then(function (results) {
+                    return results.data.d.ServerRelativeUrl;
+                });
         }
 
     }

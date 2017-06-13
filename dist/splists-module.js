@@ -59,6 +59,13 @@
             console.log(row.entity);
             $window.open($scope.itemForm + "?ID=" + row.entity.ID, '_blank');
         }
+        
+        $scope.openListView = function () {
+            spListsFactory.getViewUrl($attrs.siteUrl, $attrs.listTitle, $attrs.viewTitle)
+                .then(function (viewUrl) {
+                    $window.open(viewUrl);
+                })
+        }
 
         $scope.selected = [];
 
@@ -71,7 +78,7 @@
         function getItems(filter, deferred) {
             var deferred = $q.defer();
             $scope.promise = deferred.promise;
-            
+
             spListsFactory.getItemsWithLookups($attrs.siteUrl, $attrs.listTitle, $attrs.viewTitle, $attrs.pageSize, filter)
                 .then(function (results) {
                     $scope.items = results.items;
@@ -157,13 +164,14 @@
         vm.item = {};
         vm.siteUrl = $attrs.siteUrl;
         vm.listTitle = $attrs.listTitle;
+
         spListsFactory.getAllItems(vm.siteUrl, vm.listTitle)
             .then(function (items) {
                 vm.items = items;
             });
 
         vm.querySearch = function (searchText) {
-            console.log(searchText);
+            
             if (angular.isUndefined(searchText) || searchText === null) {
                 return vm.items;
             }

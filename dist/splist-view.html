@@ -1,6 +1,6 @@
 <md-toolbar md-component-id='listToolBar' class="md-toolbar-tools">
-   <h4><a ng-href='{{vm.siteUrl + vm.listTitle}}' target='_blank'>{{vm.listTitle}} </a> </h4>
-</md-toolbar>
+   <h4 ng-click="openListView()">{{vm.listTitle}} </h4>
+</md-toolbar> 
 
 <md-table-container>
   <table md-table md-row-select ng-model="selected" md-progress="promise">
