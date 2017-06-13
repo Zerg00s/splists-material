@@ -55,11 +55,10 @@
 
         $scope.getNextBatchOfItems = getNextBatchOfItems;
 
-        $scope.click = function (row) {
-            console.log(row.entity);
-            $window.open($scope.itemForm + "?ID=" + row.entity.ID, '_blank');
+        $scope.click = function (item) {
+            $window.open($scope.itemForm + "?ID=" + item.ID, '_blank');
         }
-        
+
         $scope.openListView = function () {
             spListsFactory.getViewUrl($attrs.siteUrl, $attrs.listTitle, $attrs.viewTitle)
                 .then(function (viewUrl) {
@@ -75,6 +74,8 @@
             page: 1
         };
 
+
+
         function getItems(filter, deferred) {
             var deferred = $q.defer();
             $scope.promise = deferred.promise;
@@ -85,7 +86,6 @@
                     $scope.nextUrl = results.nextUrl;
                     $scope.viewFields = results.viewFields;
                     $scope.itemForm = results.itemForm;
-                    $scope.columnDefs = getColumnDefs($scope.viewFields);
                     deferred.resolve();
                 });
         }
@@ -106,30 +106,7 @@
                 });
         }
 
-        function getColumnDefs(viewFields) {
-            var columnDefs = [];
-            var columnDefinition = { name: ' ', width: 70 };
-            columnDefinition.cellTemplate = '<div><a class="open-link" ng-click="grid.appScope.click(row)" href="#" >Edit</a></div>'
-            columnDefs.push(columnDefinition);
-            for (let field of viewFields) {
-                var columnDefinition = {
-                    field: field.InternalName, displayName: field.Title
-                };
-                if (field.InternalName == "File" ||
-                    (field.TypeAsString == "Note" && field.RichText) ||
-                    field.TypeAsString == "URL"
-                ) {
-                    columnDefinition.cellTemplate = '<div style="word-wrap: normal; padding:10px" ng-bind-html="row.entity[col.field]"></div>';
-                }
-                else {
-                    columnDefinition.cellTemplate = '<div style="word-wrap: normal; padding:10px"> {{row.entity[col.field]}}</div>';
-                }
 
-                columnDefs.push(columnDefinition);
-            }
-
-            return columnDefs;
-        }
     }
 
 
@@ -171,7 +148,7 @@
             });
 
         vm.querySearch = function (searchText) {
-            
+
             if (angular.isUndefined(searchText) || searchText === null) {
                 return vm.items;
             }

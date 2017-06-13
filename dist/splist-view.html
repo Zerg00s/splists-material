@@ -1,20 +1,37 @@
 <md-toolbar md-component-id='listToolBar' class="md-toolbar-tools">
-   <h4 ng-click="openListView()">{{vm.listTitle}} </h4>
-</md-toolbar> 
+  <h4>
+    <md-button ng-click="openListView()" class="md-icon-button" md-hue-2>
+      <i class="material-icons">launch</i>
+      <md-tooltip md-direction="right" md-delay='500'>Open the the list</md-tooltip>
+    </md-button>
+    {{vm.listTitle}}
+
+    <md-button ng-click="openListView()" class="md-icon-button" md-hue-2>
+      <i class="material-icons"><i class="material-icons">add_circle_outline</i></i>
+      <md-tooltip md-direction="right" md-delay='500'>Add new item</md-tooltip>
+    </md-button>
+
+  </h4>
+</md-toolbar>
 
 <md-table-container>
-  <table md-table md-row-select ng-model="selected" md-progress="promise">
+  <table md-table ng-model="selected" md-progress="promise">
     <thead md-head md-order="query.order" md-on-reorder="getItems">
       <tr md-row>
+        <th md-column></th>
         <th md-column ng-repeat='field in viewFields'>{{field.Title}}</th>
       </tr>
     </thead>
     <tbody md-body>
-      <tr md-row md-select="item"  ng-repeat="item in items">
-        <!--<td md-cell ng-repeat='field in viewFields'>{{item[field.InternalName]}}</td>-->
-        
+      <tr md-row md-select="item" ng-repeat="item in items">
+        <td md-cell>
+          <md-button ng-click="click(item)" class="md-icon-button" md-hue-2>
+            <i class="material-icons">launch</i>
+            <md-tooltip md-direction="right" md-delay='500'>Open the item</md-tooltip>
+          </md-button>
+        </td>
         <td md-cell ng-repeat='field in viewFields'>
-               <table-cell field='field' item='item'></table-cell>
+          <table-cell field='field' item='item'></table-cell>
         </td>
         <!--<td ng-repeat='field in viewFields'>{{item[field.InternalName]}}</td>-->
 
