@@ -14,5 +14,10 @@
             $mdSidenav('left').toggle();
         }
 
+        setTimeout(function () {
+            $("[type='search']").focus();
+        }, 500)
+
+
     }
 })();

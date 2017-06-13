@@ -13,6 +13,10 @@ md-toolbar h1{
     margin:auto;
 }
 
+.center-text{
+    display: flex;  justify-content: center;  flex-direction: column;
+}
+
 .center{
     text-align: center;
 }
@@ -39,4 +43,33 @@ md-toolbar h1{
 
 .slide-animate.ng-enter{
     transform: translate(-100%, 0);
+}
+
+.file-link a{
+    background-position: center left;
+	background-repeat: no-repeat;
+	padding-left: 35px;
+	height: 35px;
+	display: inline-block;
+	padding-top: 10px;
+}
+/* file links */
+.file-link a[href$=".docx"]{
+	background-image: url(/_layouts/15/images/icdocx.png);
+}
+.file-link a[href$=".xlsx"]{
+	background-image: url(/_layouts/15/images/icxlsx.png);	
+}
+.file-link a[href$=".txt"]{
+	background-image: url(/_layouts/15/images/ictxt.gif);	
+}
+.file-link a[href$=".vsdx"]{
+	background-image: url(/_layouts/15/images/icvsdx.gif);	
+}
+.file-link a[href$=".pdf"]{
+	background-image: url(/_layouts/15/images/icpdf.png);	
+}
+
+.file-link a[href$=".rdp"]{
+	background-image: url(IMG/rdp.gif);	
 }

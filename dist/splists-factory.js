@@ -142,7 +142,7 @@
 
         /*Get view fields */
         function getViewFields(siteUrl, listTitle, viewTitle) {
-            var viewUrl = concatUrls(siteUrl, "/_api/web/lists/getByTitle('" + listTitle + "')/views/getByTitle('" + viewTitle + "')/viewfields")
+            var viewUrl = concatUrls(siteUrl, "/_api/web/lists/getByTitle('" + encodeURIComponent(listTitle) + "')/views/getByTitle('" + encodeURIComponent(viewTitle) + "')/viewfields")
             $log.info(viewUrl);
             return $http({
                 url: viewUrl,
@@ -210,7 +210,7 @@
 
         /*Get all list fields */
         function getListFields(siteUrl, listTitle) {
-            var listFieldsUrl = concatUrls(siteUrl, "/_api/web/lists/getByTitle('" + listTitle + "')/fields");
+            var listFieldsUrl = concatUrls(siteUrl, "/_api/web/lists/getByTitle('" + encodeURIComponent(listTitle) + "')/fields");
             $log.info(listFieldsUrl);
             return $http({
                 url: listFieldsUrl,
@@ -267,7 +267,7 @@
             }
 
             function getItemForm() {
-                var itemFormUrl = siteUrl + "/_api/web/lists/GetByTitle('" + listTitle + "')/Forms?$select=ServerRelativeUrl&$filter=FormType eq " + 6;
+                var itemFormUrl = siteUrl + "/_api/web/lists/GetByTitle('" + encodeURIComponent(listTitle) + "')/Forms?$select=ServerRelativeUrl&$filter=FormType eq " + 6;
                 return $http({
                     url: itemFormUrl,
                     method: 'GET',
@@ -283,7 +283,7 @@
                 var viewFields = results[0];
                 var itemForm = results[1];
                 var itemsUrl = concatUrls(siteUrl, '/_api/web/lists/');
-                itemsUrl = concatUrls(itemsUrl, "getByTitle('" + listTitle + "')/items");
+                itemsUrl = concatUrls(itemsUrl, "getByTitle('" + encodeURIComponent(listTitle) + "')/items");
                 itemsUrl = appendFieldSelectors(itemsUrl, viewFields);
                 itemsUrl += "&$top=" + pageSize.toString();
 
@@ -363,7 +363,7 @@
         }
 
         function getViewUrl(siteUrl, listTitle, viewTitle) {
-            var viewUrl = concatUrls(siteUrl, "/_api/web/lists/getByTitle('" + encodeURIComponent(listTitle) + "')/views/getByTitle('" + viewTitle + "')")
+            var viewUrl = concatUrls(siteUrl, "/_api/web/lists/getByTitle('" + encodeURIComponent(listTitle) + "')/views/getByTitle('" + encodeURIComponent(viewTitle) + "')")
             $log.info(viewUrl);
             return $http({
                 url: viewUrl,
