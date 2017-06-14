@@ -2,7 +2,6 @@
     'use strict';
     angular.module('splists', []);
 
-
     /*
         S H A R E P O I N T   L I S T    D I R E C T I V E 
     */
@@ -29,6 +28,7 @@
             },
             compile: function (element, attrs) { //setting default values
                 if (!attrs.pageSize) { attrs.pageSize = '10'; }
+
             }
         };
         return directive;
@@ -36,7 +36,7 @@
     }
 
     function splistController($attrs, $scope, $q, spListsFactory, $window) {
-
+        $scope.pageSize = parseInt($attrs.pageSize);
         if ($attrs.lookupField) {
             $scope.$watch('vm.lookupId', function (lookupId) {
                 if (lookupId) {
@@ -74,6 +74,10 @@
             page: 1
         };
 
+        $scope.pageItems = [];
+        $scope.pageNumber = 1;
+        $scope.pageRight = pageRight;
+        $scope.pageLeft = pageLeft;
 
 
         function getItems(filter, deferred) {
@@ -83,6 +87,7 @@
             spListsFactory.getItemsWithLookups($attrs.siteUrl, $attrs.listTitle, $attrs.viewTitle, $attrs.pageSize, filter)
                 .then(function (results) {
                     $scope.items = results.items;
+                    $scope.pageItems = $scope.items;
                     $scope.nextUrl = results.nextUrl;
                     $scope.viewFields = results.viewFields;
                     $scope.itemForm = results.itemForm;
@@ -106,76 +111,44 @@
                 });
         }
 
-
-    }
-
-
-    /*
-        S E L E C T   D I R E C T I V E 
-    */
-    angular.module('splists').directive('listItemSelect', listItemSelect);
-    listItemSelect.inject = ['$http'];
-    function listItemSelect($http) {
-        // Usage:
-        //
-        // Creates:
-        //
-        var directive = {
-            bindToController: true,
-            controller: listItemSelectController,
-            controllerAs: 'vm',
-            restrict: 'E',
-            scope: {
-                siteUrl: '@',
-                listTitle: '@',
-                selectedItem: '='
-            },
-            templateUrl: 'listItemSelect-view.html'
-        };
-        return directive;
-
-
-    }
-    function listItemSelectController($attrs, $scope, $http, spListsFactory) {
-        var vm = this;
-        vm.item = {};
-        vm.siteUrl = $attrs.siteUrl;
-        vm.listTitle = $attrs.listTitle;
-
-        spListsFactory.getAllItems(vm.siteUrl, vm.listTitle)
-            .then(function (items) {
-                vm.items = items;
-            });
-
-        vm.querySearch = function (searchText) {
-
-            if (angular.isUndefined(searchText) || searchText === null) {
-                return vm.items;
-            }
-            else {
-                vm.filteredItems = vm.items.filter(function (item) {
-
-                    if (item.Title.toLowerCase().indexOf(searchText.toLowerCase()) != -1) {
-                        return true;
-                    }
-                    else {
-                        return false;
-                    }
-                })
-                return vm.filteredItems
-            }
+        function pageLeft() {
+            $scope.pageNumber--;
+            $scope.pageItems = getitemsFromPage($scope.pageNumber)
         }
 
-        vm.selectedItemChange = function (newItem) {
-        };
+        function getitemsFromPage(pageNumber) {
+            pageNumber--;
 
-        // $scope.$watch(() => vm.item.selected, function (newVal) {
-        //     if (newVal) {
-        //         $scope.selectedId = newVal;
-        //         console.log(newVal);
-        //     }
-        // });
+            var startIndex = pageNumber * $scope.pageSize;
+            var endIndex = startIndex + $scope.pageSize
+            var pageItems = $scope.items.slice(startIndex, endIndex);
+
+            console.log(startIndex, 2, $scope.items.length, $scope.items, pageItems);
+            return pageItems;
+        }
+
+        function pageRight() {
+            $scope.pageNumber++;
+            var pItems = getitemsFromPage($scope.pageNumber);
+            if (pItems.length > 0) {
+                $scope.pageItems = pItems;
+                return;
+            }
+
+            var deferred = $q.defer();
+            $scope.promise = deferred.promise;
+            spListsFactory.getNextItems($scope.nextUrl, $scope.viewFields)
+                .then(function (results) {
+                    $scope.items = $scope.items.concat(results.items);
+                    $scope.pageItems = results.items;
+                    $scope.nextUrl = results.nextUrl;
+                    deferred.resolve();
+                });
+        }
     }
+
+
+
 
 
 })();

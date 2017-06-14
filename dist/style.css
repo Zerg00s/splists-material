@@ -49,9 +49,8 @@ md-toolbar h1{
     background-position: center left;
 	background-repeat: no-repeat;
 	padding-left: 35px;
-	height: 35px;
 	display: inline-block;
-	padding-top: 10px;
+	padding-top: 3px;
 }
 /* file links */
 .file-link a[href$=".docx"]{
