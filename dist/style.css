@@ -66,9 +66,13 @@ md-toolbar h1{
 .file-link a[href$=".vsdx"]{
 	background-image: url(/_layouts/15/images/icvsdx.gif);	
 }
-.file-link a[href$=".pdf"]{
+.file-link a[href$=".pdf"],
+.file-link a[href$=".PDF"]{
 	background-image: url(/_layouts/15/images/icpdf.png);	
 }
 .file-link a[href$=".rdp"]{
 	background-image: url(IMG/rdp.gif);	
+}
+.file-link a[href$=".xlsm"]{
+	background-image: url(/_layouts/15/images/icxlsm.png);	
 }
