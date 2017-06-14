@@ -49,8 +49,9 @@ md-toolbar h1{
     background-position: center left;
 	background-repeat: no-repeat;
 	padding-left: 35px;
+	height: 35px;
 	display: inline-block;
-	padding-top: 3px;
+	padding-top: 10px;
 }
 /* file links */
 .file-link a[href$=".docx"]{
@@ -65,11 +66,9 @@ md-toolbar h1{
 .file-link a[href$=".vsdx"]{
 	background-image: url(/_layouts/15/images/icvsdx.gif);	
 }
-.file-link a[href$=".pdf"],
-.file-link a[href$=".PDF"]{
+.file-link a[href$=".pdf"]{
 	background-image: url(/_layouts/15/images/icpdf.png);	
 }
-
 .file-link a[href$=".rdp"]{
 	background-image: url(IMG/rdp.gif);	
 }
