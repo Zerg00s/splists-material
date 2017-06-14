@@ -52,13 +52,11 @@
 
   <!--<md-button class="btn btn-primary" ng-click="getNextBatchOfItems()" ng-if="nextUrl">Load more</md-button>-->
   <div ng-if="pageNumber > 1 || nextUrl || items.length > pageNumber * pageSize" layout-padding>
-    <md-button class="btn btn-primary" ng-click="pageLeft()" ng-if='pageNumber > 1'>
+    <md-button ng-click="pageLeft()" ng-if='pageNumber > 1' class="md-small">
       <i class="material-icons">keyboard_arrow_left</i>
     </md-button>
-    page {{ pageNumber}}
-
-
-    <md-button class="btn btn-primary" ng-click="pageRight()" ng-if="nextUrl || items.length > pageNumber * pageSize">
+    {{startItemIndex}} - {{endItemIndex}}
+    <md-button class="md-small" ng-click="pageRight()" ng-if="nextUrl || items.length > pageNumber * pageSize">
       <i class="material-icons">keyboard_arrow_right</i>
     </md-button>
 

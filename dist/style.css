@@ -13,6 +13,16 @@ md-toolbar h1{
     margin:auto;
 }
 
+.md-button.md-small {
+    min-width:  1%;
+    min-height: 1%;
+    padding:0;
+}
+
+.md-small i{
+    margin-top:10px;
+}
+
 .center-text{
     display: flex;  justify-content: center;  flex-direction: column;
 }

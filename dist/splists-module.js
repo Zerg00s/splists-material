@@ -79,6 +79,10 @@
         $scope.pageRight = pageRight;
         $scope.pageLeft = pageLeft;
 
+        $scope.$watchCollection('[pageItems, pageNumber]', function () {
+            $scope.startItemIndex = (($scope.pageNumber - 1) * $scope.pageSize) + 1;
+            $scope.endItemIndex = $scope.startItemIndex + $scope.pageItems.length;
+        })
 
         function getItems(filter, deferred) {
             var deferred = $q.defer();
