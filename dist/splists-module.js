@@ -35,7 +35,30 @@
 
     }
 
-    function splistController($attrs, $scope, $q, spListsFactory, $window) {
+    function splistController($attrs, $scope, $q, spListsFactory, $window, $mdDialog) {
+
+        // DIALOG START
+        $scope.showAdvanced = function (item) {
+            $mdDialog.show({
+                controller: DialogController,
+                locals: {
+                    item: item,
+                    itemForm: $scope.itemForm
+                },
+                templateUrl: 'item-dialog-view.html',
+                parent: angular.element(document.body),
+                targetEvent: item,
+                clickOutsideToClose: true,
+                fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+            })
+                .then(function (answer) {
+                    $scope.status = 'You said the information was "' + answer + '".';
+                }, function () {
+                    $scope.status = 'You cancelled the dialog.';
+                });
+        };
+
+        // DIALOG END
 
         $scope.$watch('promise', function () {
             if (!$scope.promise) {
@@ -65,7 +88,8 @@
         $scope.getNextBatchOfItems = getNextBatchOfItems;
 
         $scope.click = function (item) {
-            $window.open($scope.itemForm + "?ID=" + item.ID, '_blank');
+            $scope.showAdvanced(item);
+            // $window.open($scope.itemForm + "?ID=" + item.ID, '_blank');
         }
 
         $scope.openListView = function () {
@@ -76,7 +100,6 @@
         }
 
         $scope.selected = [];
-
         $scope.pageItems = [];
         $scope.pageNumber = 1;
         $scope.pageRight = pageRight;
@@ -87,7 +110,26 @@
             $scope.endItemIndex = $scope.startItemIndex + $scope.pageItems.length;
         })
 
-        function resetPagination(){
+        function DialogController($scope, $mdDialog, $sce, item, itemForm) {
+            $scope.item = item;
+            $scope.itemForm = itemForm + "?ID=" + item.ID + "&isdlg=1"
+
+            $scope.trustSrc = $sce.trustAsResourceUrl;
+
+            $scope.hide = function () {
+                $mdDialog.hide();
+            };
+
+            $scope.cancel = function () {
+                $mdDialog.cancel();
+            };
+
+            $scope.answer = function (answer) {
+                $mdDialog.hide(answer);
+            };
+        }
+
+        function resetPagination() {
             $scope.pageItems = [];
             $scope.items = [];
             $scope.pageNumber = 1;

@@ -61,7 +61,7 @@ md-toolbar h1{
 	padding-left: 35px;
 	height: 35px;
 	display: inline-block;
-	padding-top: 10px;
+	height:18px;
 }
 /* file links */
 .file-link a[href$=".docx"]{
@@ -84,5 +84,8 @@ md-toolbar h1{
 	background-image: url(IMG/rdp.gif);	
 }
 .file-link a[href$=".xlsm"]{
+	background-image: url(/_layouts/15/images/icxlsm.png);	
+}
+.file-link a[href$=".jpg"]{
 	background-image: url(/_layouts/15/images/icxlsm.png);	
 }
