@@ -36,14 +36,23 @@
     }
 
     function splistController($attrs, $scope, $q, spListsFactory, $window) {
+
+        $scope.$watch('promise', function () {
+            if (!$scope.promise) {
+                return;
+            }
+            $scope.loading = true;
+            $q.when($scope.promise).then(function () {
+                $scope.loading = false;
+            });
+        })
+
         $scope.pageSize = parseInt($attrs.pageSize);
         if ($attrs.lookupField) {
             $scope.$watch('vm.lookupId', function (lookupId) {
                 if (lookupId) {
                     $scope.nextUrl = null;
                     let filter = $attrs.lookupField + "/Id eq " + lookupId;
-
-
                     getItems(filter);
                 }
             });
@@ -68,12 +77,6 @@
 
         $scope.selected = [];
 
-        $scope.query = {
-            order: 'ID',
-            limit: 5,
-            page: 1
-        };
-
         $scope.pageItems = [];
         $scope.pageNumber = 1;
         $scope.pageRight = pageRight;
@@ -84,7 +87,15 @@
             $scope.endItemIndex = $scope.startItemIndex + $scope.pageItems.length;
         })
 
+        function resetPagination(){
+            $scope.pageItems = [];
+            $scope.items = [];
+            $scope.pageNumber = 1;
+            $scope.nextUrl = null;
+        }
+
         function getItems(filter, deferred) {
+            resetPagination();
             var deferred = $q.defer();
             $scope.promise = deferred.promise;
 
@@ -122,12 +133,9 @@
 
         function getitemsFromPage(pageNumber) {
             pageNumber--;
-
             var startIndex = pageNumber * $scope.pageSize;
             var endIndex = startIndex + $scope.pageSize
             var pageItems = $scope.items.slice(startIndex, endIndex);
-
-            console.log(startIndex, 2, $scope.items.length, $scope.items, pageItems);
             return pageItems;
         }
 
@@ -150,9 +158,5 @@
                 });
         }
     }
-
-
-
-
 
 })();

@@ -25,6 +25,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.1.4/angular-material.min.js"></script>
 
     <script src='lib/md-data-table.min.js'></script>
+    <script src='lib/polifyll.js'></script>
 
 
     <script src='splists-module.js'></script>

@@ -41,9 +41,12 @@
         /* Allo HTML content to be rendered correctny, Lookup fields to display text instead of IDs*/
         function processListItemValues(items, viewFields) {
             var refinedItems = [];
-
-            for (let item of items) {
-                for (let field of viewFields) {
+            for (var i = 0; i < items.length; i++) {
+                //for (let item of items) {
+                var item = items[i];
+                for (var k = 0; k < viewFields.length; k++) {
+                    var field = viewFields[k];
+                    // for (let field of viewFields) {
                     switch (field.TypeAsString) {
                         case "Note":
                             if (field.RichText) {
@@ -196,7 +199,10 @@
             function getUniqueFields(viewFields) {
                 //Some fields will have the same InternalNames. we don't want these to be repeated
                 let uniqueFields = [];
-                for (let field of viewFields) {
+                for (var k = 0; k < viewFields.length; k++) {
+                    //for (let field of viewFields) {             
+                    var field = viewFields[k];
+
                     if (!uniqueFields.find(function (uniqueField) {
                         return field.InternalName == uniqueField.InternalName;
                     })) {

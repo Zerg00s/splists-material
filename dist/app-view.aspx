@@ -5,7 +5,7 @@
     <title>Client Documentation</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="style.css?ver=1" rel="stylesheet">
+    <link href="style.css?ver=2" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.1.4/angular-material.min.css" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://rawgit.com/daniel-nagy/md-data-table/master/dist/md-data-table.css">
@@ -25,14 +25,15 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.1.4/angular-material.min.js"></script>
 
     <script src='lib/md-data-table.min.js'></script>
+    <script src='lib/polifyll.js'></script>
 
 
-    <script src='splists-module.js?ver=1'></script>
-    <script src='item-select.controller.js?ver=1'></script>
+    <script src='splists-module.js?ver=2'></script>
+    <script src='item-select.controller.js?ver=2'></script>
 
-    <script src='splists-factory.js?ver=1'></script>
-    <script src='table-cell.controller.js?ver=1'></script>
-    <script src='app-module.js?ver=1'></script>
+    <script src='splists-factory.js?ver=2'></script>
+    <script src='table-cell.controller.js?ver=2'></script>
+    <script src='app-module.js?ver=2'></script>
 </body>
 
 </html>
