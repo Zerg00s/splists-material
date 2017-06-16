@@ -29,6 +29,9 @@
 
 
     <script src='splists-module.js?ver=2'></script>
+    <script src='spforms-factory.js'></script>
+    <script src='splists-factory.js'></script>
+    
     <script src='item-select.controller.js?ver=2'></script>
 
     <script src='splists-factory.js?ver=2'></script>
