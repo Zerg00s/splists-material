@@ -28,12 +28,13 @@
     /* @ngInject */
     function spItemFormController ($scope, $attrs, spListsFactory) {
         var vm = this;
+        console.log('spItemFormController start...');
         $scope.$watch(function () {
               return $attrs.siteUrl;
            }, getListItem);
-           
+
         function getListItem(){
-            spListsFactory.getListFields($attrs.siteUrl, $attrs.listTitle)
+            spListsFactory.getItemById($attrs.siteUrl, $attrs.listTitle, $attrs.itemId)
             .then(function(result){
                 console.log(result);
                 vm.result = result;

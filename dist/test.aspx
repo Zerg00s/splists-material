@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <title>Client Documentation</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="style.css?ver=2" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.1.4/angular-material.min.css" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://rawgit.com/daniel-nagy/md-data-table/master/dist/md-data-table.css">
@@ -13,7 +12,28 @@
 </head>
 
 <body ng-app="app" ng-controller="AppController as app" ng-cloak layout='row'>
-    <div ng-include="'main.view.html'" flex layout='vertical'> </div>
+    
+<div layout='column' flex>
+    <md-content layout-padding>
+        <md-content layout-padding>
+            <!--<splist site-url='/sites/demo/Kiosk/' list-title='Signins' page-size='5' view-title='All Items'></splist>-->
+            <sp-item-form site-url='/sd/' list-title='SampleList' item-id="3" ></sp-item-form>
+        </md-content>
+    </md-content>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
@@ -30,9 +50,9 @@
 
     <script src='splists-module.js?ver=2'></script>
     <script src='sp-item-form/sp-item-form.js?ver=2'></script>
-    <script src='spforms-factory.js'></script>
-    <script src='splists-factory.js'></script>
-    
+    <script src='spforms-factory.js?ver=2'></script>
+    <script src='splists-factory.js?ver=2'></script>
+
     <script src='item-select.controller.js?ver=2'></script>
 
     <script src='splists-factory.js?ver=2'></script>
@@ -41,5 +61,3 @@
 </body>
 
 </html>
-
-<!--https://jolera365.sharepoint.com/sd/_catalogs/masterpage/material/app-view.aspx-->

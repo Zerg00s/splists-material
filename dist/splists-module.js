@@ -95,7 +95,7 @@
         }
 
         $scope.openListView = function () {
-            spListsFactory.getViewUrl($attrs.siteUrl, $attrs.listTitle, $attrs.viewTitle)
+            spListsFactory.getListServerRelativeUrl($attrs.siteUrl, $attrs.listTitle, $attrs.viewTitle)
                 .then(function (viewUrl) {
                     $window.open(viewUrl);
                 })
