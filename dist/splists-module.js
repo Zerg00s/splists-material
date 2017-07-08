@@ -43,7 +43,9 @@
                 controller: DialogController,
                 locals: {
                     item: item,
-                    itemForm: $scope.itemForm
+                    itemForm: $scope.itemForm,
+                    listTitle: $scope.vm.listTitle,
+                    siteUrl: $scope.vm.siteUrl,
                 },
                 templateUrl: 'item-dialog-view.html',
                 parent: angular.element(document.body),
@@ -110,9 +112,11 @@
             $scope.endItemIndex = $scope.startItemIndex + $scope.pageItems.length;
         })
 
-        function DialogController($scope, $mdDialog, $sce, item, itemForm) {
+        function DialogController($scope, $mdDialog, $sce, item, itemForm, listTitle, siteUrl) {
             $scope.item = item;
-            $scope.itemForm = itemForm + "?ID=" + item.ID + "&isdlg=1"
+            $scope.itemForm = itemForm + "?ID=" + item.ID + "&isdlg=1";
+            $scope.listTitle = listTitle;
+            $scope.siteUrl = siteUrl
 
             $scope.trustSrc = $sce.trustAsResourceUrl;
 

@@ -1,0 +1,12 @@
+{
+	"version": 3,
+	"file": "src/styles/index.css",
+	"sources": [
+		"src/styles/index.scss"
+	],
+	"sourcesContent": [
+		"// Here goes your awesome SCSS\r\n"
+	],
+	"names": [],
+	"mappings": ""
+}

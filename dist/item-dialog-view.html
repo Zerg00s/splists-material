@@ -1,24 +1,24 @@
-<md-dialog aria-label="Mango (Fruit)">
+<md-dialog aria-label="List item form">
     <form ng-cloak>
         <md-toolbar>
             <div class="md-toolbar-tools">
                 <h2>{{item.Title}} <span ng-show="!item.Title">Edit item</span></h2>
                 <span flex></span>
                 <md-button class="md-icon-button" ng-click="cancel()">
-                    <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+                   X
                 </md-button>
             </div>
         </md-toolbar>
 
         <md-dialog-content style="width:600px; height:1000px;overflow-x:hidden;">
             <div class="md-dialog-content" style="width:100%;height:100%">
-                <iframe ng-src="{{trustSrc(itemForm)}}" frameBorder="0" style="width:100%;height:100%;overflow-x: hidden !important;"></iframe>
+                <sp-item-form site-url='{{siteUrl}}' list-title='{{listTitle}}' item-id="{{item.ID}}" ></sp-item-form>
             </div>
         </md-dialog-content>
 
         <md-dialog-actions layout="row">
             <span flex></span>
-            <md-button ng-click="answer('not useful')">
+            <md-button ng-click="answer('not useful yet')">
                 Close
             </md-button>
         </md-dialog-actions>
