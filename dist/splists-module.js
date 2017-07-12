@@ -120,6 +120,9 @@
 
             $scope.trustSrc = $sce.trustAsResourceUrl;
 
+            $scope.save = function(){
+                $scope.$broadcast("save-item");
+            }
             $scope.hide = function () {
                 $mdDialog.hide();
             };

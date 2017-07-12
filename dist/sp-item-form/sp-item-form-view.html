@@ -1,3 +1,11 @@
-<div>{{vm.itemId}}</div>
+<!--<div>{{vm.itemId}}</div>
 <div>{{vm.listTitle}}</div>
-<div>{{vm.siteUrl}}</div>
+<div>{{vm.siteUrl}}</div>-->
+
+<div ng-if="!vm.callback">
+    <md-button class="md-primary" ng-click="vm.callback()" ng-if="!vm.viewMode">Save</md-button>
+    <md-button  ng-click="vm.callback()">Cancel</md-button>
+</div>
+<div ng-repeat="field in vm.item.fields">
+    <sp-field field='field' field-value="vm.item.fieldValues[field.InternalName]" ></sp-field>
+</div>

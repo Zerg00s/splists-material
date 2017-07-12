@@ -1,0 +1,29 @@
+<h3 style="margin-top:20px">{{vm.field.Title}}</h3>
+
+<!--<h3 style="margin-top:20px">{{vm.field.TypeAsString}}</h3>-->
+
+<div class="animate-switch-container" ng-switch on="vm.field.TypeAsString">
+    <div class="animate-switch" ng-switch-when="Lookup|User" ng-switch-when-separator="|">
+        {{vm.fieldValue.Title}}
+    </div>
+
+    <div class="animate-switch" ng-switch-when="LookupMulti|UserMulti" ng-switch-when-separator="|">
+        <div ng-repeat="value in vm.fieldValue.results">
+            {{value.Title}}
+        </div>
+    </div>
+
+    <div class="animate-switch" ng-switch-when="TaxonomyFieldTypeMulti">
+        <div ng-repeat="value in vm.fieldValue.results">
+            {{value.Label}}
+        </div>
+    </div>
+
+    <div class="animate-switch" ng-switch-when="MultiChoice">
+        <div ng-repeat="value in vm.fieldValue.results">
+            {{value}}
+        </div>
+    </div>
+
+    <div class="animate-switch" ng-switch-default>{{vm.fieldValue}}</div>
+</div>

@@ -30,6 +30,7 @@
 
     <script src='splists-module.js?ver=2'></script>
     <script src='sp-item-form/sp-item-form.js?ver=2'></script>
+    <script src='sp-item-form/sp-field.js?ver=2'></script>
     <script src='spforms-factory.js?ver=2'></script>
     <script src='splists-factory.js?ver=2'></script>
 

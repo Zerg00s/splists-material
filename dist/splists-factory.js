@@ -27,18 +27,15 @@
 
         function getItemById(siteUrl, listTitle, itemId){
 
-            var itemPromise = getItem();
-            var fieldsPromise = getListFields(siteUrl, listTitle);
+            return getListFieldsEditable(siteUrl, listTitle)
+            .then(getItem);
+            
 
-            return $q.all([itemPromise, fieldsPromise]).then(processItem);
-
-            function processItem(itemResults){
-                $log.info(itemResults[1]);
-                return itemResults[0];
-            }
-
-            function getItem(){
+            function getItem(listFields){
+                
                 var listItemUrl = concatUrls(siteUrl, "/_api/web/lists/getByTitle('" + encodeURIComponent(listTitle) + "')/items/getById("+itemId+")");
+
+                listItemUrl = appendFieldSelectors(listItemUrl, listFields)
 
                 return $http({
                     url:listItemUrl,
@@ -48,8 +45,46 @@
                     }
                 }).then(parseResult);
 
+                function appendFieldSelectors(itemsUrl, viewFields) {
+                    var lookupFields = viewFields.filter(function (field) {
+                        if (field.TypeAsString == 'Lookup' ||
+                            field.TypeAsString == 'LookupMulti' ||
+                            field.TypeAsString == 'User' ||
+                            field.TypeAsString == 'UserMulti' ||
+                            field.InternalName == 'File') {
+                            return true;
+                        }
+                    }).map(function (lookupField) {
+                        return lookupField.InternalName;
+                    }).join(',');
+
+                    var allViewFields = viewFields.map(function (field) {
+                        var select = field.InternalName;
+                        if (field.TypeAsString == 'Lookup' ||
+                            field.TypeAsString == 'LookupMulti') {
+                            select = select + '/' + field.LookupField;
+                        }
+                        else if (field.TypeAsString == 'User' ||
+                            field.TypeAsString == 'UserMulti') {
+                            select = select + '/' + "Title";
+                        }
+                        else if (field.InternalName == 'File') {
+                            select = select + '/' + "ServerRelativeUrl";
+                        }
+                        return select;
+                    }).join(',');
+
+                    var select = "?$select=ID," + allViewFields;
+                    var expand = "&$expand=" + lookupFields;
+
+                    return itemsUrl + select + expand;
+                }
+
                 function parseResult(result){
-                    return result.data.d;
+                    return {
+                        fieldValues: result.data.d,
+                        fields: listFields
+                    }
                 }
             }
         }
@@ -202,6 +237,36 @@
                 });
         }
 
+        function getListFieldsEditable(siteUrl, listTitle){
+            return getListFields(siteUrl, listTitle).then(selectEditableFields);
+
+            function selectEditableFields(fields){
+                 return fields.filter(isEditableField);
+            }
+
+            function isEditableField(field){
+                if(field.ReadOnlyField){
+                    return false;
+                }
+                if(field.InternalName == 'TaxCatchAll'){
+                    return false;   
+                }
+
+                if(field.Hidden){
+                    return false;
+                }
+
+                if(field.Title == "Content Type"){
+                    return false;
+                }   
+
+                if(field.InternalName.indexOf('_x00') == 0 ){
+                    $log.warn('Invalid SharePoint field. Please, recreate this field with a clean internal name. Field name:', field.Title);
+                    return false;
+                }
+                return true;
+            }
+        }
         /*Get all list fields PUBLIC*/
         function getListFields(siteUrl, listTitle) {
             var listFieldsUrl = concatUrls(siteUrl, "/_api/web/lists/getByTitle('" + encodeURIComponent(listTitle) + "')/fields");
