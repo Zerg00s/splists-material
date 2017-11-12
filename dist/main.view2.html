@@ -18,9 +18,9 @@
             <md-button ng-click="app.toggleLeft()" class="md-icon-button" md-hue-2>
                 <i class="material-icons">menu</i>
             </md-button>
-            <!--<span style='margin:10px;'>Client Documentation</span>-->
-            <div flex class='center-text'>Jolera Clients</div>
-            <list-item-select flex='40' site-url='/sd/' list-title='Client List' selected-item='app.item' />
+            <div flex class='center-text'>List of Clients</div>
+            <!-- Dropdown menu:  -->
+            <list-item-select flex='40' list-title='Clients' selected-item='app.item' />
         </div>
     </md-toolbar>
 
@@ -28,95 +28,7 @@
     <!--MAIN CONTENT-->
     <md-content layout-padding>
         <md-content layout-padding>
-            <!--<h1 class='center'> {{main.message}}</h1>-->
-
-            <splist site-url='/sites/demo/Kiosk/' list-title='Signins' page-size='5' view-title='All Items'></splist>
-            <!--<splist site-url='/sd/' list-title='SampleList' page-size='2' view-title='All Items'></splist>-->
-            <!--<splist site-url='/sd/' list-title='Client Pictures' page-size='2' view-title='All Pictures'></splist>-->
-            <!--<splist site-url='/sd/' list-title='Primary Contact' page-size='2' view-title='All Items'></splist>-->
-
-
-            <!--<splist site-url='/sd/' list-title='Client Servers' page-size='20' view-title='Client Servers - HomePage' lookup-field='Client_x0020_Name'
-                lookup-id='app.item.ID'>
-            </splist>
-
-            <splist site-url='/sd/' list-title='Client Domain Names' page-size='20' view-title='Client Domain Names - HomePage' lookup-field='Client_x0020_Name'
-                lookup-id='app.item.ID'>
-            </splist>
-
-            <splist site-url='/sd/' list-title='Client Sites' page-size='20' view-title='Client Sites - HomePage' lookup-field='Client_x0020_Name'
-                lookup-id='app.item.ID'>
-            </splist>
-
-            <splist site-url='/sd/' list-title='Documents' page-size='20' view-title='Documents - HomePage' lookup-field='Client_x0020_Name0'
-                lookup-id='app.item.ID'>
-            </splist>
-
-            <splist site-url='/sd/' list-title='Primary Contact' page-size='20' view-title='PrimaryContact-Homepage' lookup-field='Client_x0020_Name'
-                lookup-id='app.item.ID'>
-            </splist>
-
-            <splist site-url='/sd/' list-title='Client Advisories' page-size='20' view-title='All items' lookup-field='Client_x0020_Name'
-                lookup-id='app.item.ID'>
-            </splist>
-
-            <splist site-url='/sd/' list-title='Connectivity' page-size='20' view-title='Remote Access - HomePage' lookup-field='Client_x0020_Name'
-                lookup-id='app.item.ID'>
-            </splist>-->
-
-            <!--DOES NOT WORK-->
-            <!--<splist site-url='/sd/' list-title='ISP Info' page-size='20' view-title='ISP Info - HomePage' lookup-field='Clien Name'
-            lookup-id='app.item.ID'>
-            </splist>-->
-
-            <!--<splist site-url='/sd/' list-title='Web Hosting' page-size='20' view-title='Web Hosting - Homepage' lookup-field='Client_x0020_Name'
-                lookup-id='app.item.ID'>
-            </splist>
-
-            <splist site-url='/sd/' list-title='Mapped Drives - Folder Redirection' page-size='20' view-title='Mapped Drives - Homepage'
-                lookup-field='Client_x0020_Name' lookup-id='app.item.ID'>
-            </splist>
-
-            <splist site-url='/sd/' list-title='Client Pictures' page-size='20' view-title='Pictures-Homepage' lookup-field='Client'
-                lookup-id='app.item.ID'>
-            </splist>
-
-            <splist site-url='/sd/' list-title='Software Shares' page-size='20' view-title='Software Share - Homepage' lookup-field='Client_x0020_Name'
-                lookup-id='app.item.ID'>
-            </splist>
-
-            <splist site-url='/sd/' list-title='Credentials' page-size='20' view-title='Credentials - HomePage' lookup-field='Client_x0020_Name'
-                lookup-id='app.item.ID'>
-            </splist>
-
-            <splist site-url='/sd/' list-title='UPS - Battery Backups' page-size='20' view-title='UPS - Battery Backup - Homepage' lookup-field='Client_x0020_Name'
-                lookup-id='app.item.ID'>
-            </splist>
-
-            <splist site-url='/sd/' list-title='Products' page-size='20' view-title='Products - Homepage' lookup-field='Client_x0020_Name'
-                lookup-id='app.item.ID'>
-            </splist>
-
-            <splist site-url='/sd/' list-title='Restricted Credentials' page-size='20' view-title='Restricted Credentials Homepage' lookup-field='Client_x0020_Name'
-                lookup-id='app.item.ID'>
-            </splist>
-
-            <splist site-url='/sd/' list-title='3rd Party - Escalation Contact Info' page-size='20' view-title='3rd Party Contact Info -Homepage'
-                lookup-field='Client_x0020_Name' lookup-id='app.item.ID'>
-            </splist>
-
-            <splist site-url='/sd/' list-title='Network Devices' page-size='20' view-title='NetworkDevices-Homepage' lookup-field='Client_x0020_Name'
-                lookup-id='app.item.ID'>
-            </splist>
-
-            <splist site-url='/sd/' list-title='Client Servers' page-size='20' view-title='Client Servers - HomePage' lookup-field='Client_x0020_Name'
-                lookup-id='app.item.ID'>
-            </splist>
-
-            <splist site-url='/sd/' list-title='Printers' page-size='20' view-title='Printers-Homepage' lookup-field='Client_x0020_Name'
-                lookup-id='app.item.ID'>
-            </splist>-->
-
+            <splist list-title='Signins' page-size='2' view-title='All Items'></splist>
 
         </md-content>
     </md-content>

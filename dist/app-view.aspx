@@ -42,5 +42,3 @@
 </body>
 
 </html>
-
-<!--https://jolera365.sharepoint.com/sd/_catalogs/masterpage/material/app-view.aspx-->

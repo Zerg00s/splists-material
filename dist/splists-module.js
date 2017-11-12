@@ -27,7 +27,16 @@
                 lookupId: '='
             },
             compile: function (element, attrs) { //setting default values
-                if (!attrs.pageSize) { attrs.pageSize = '10'; }
+                if (!attrs.pageSize) { attrs.pageSize = '10'; };
+                if (!attrs.siteUrl) { // set default sit url if not specified:
+                    if(window._spPageContextInfo && window._spPageContextInfo.webServerRelativeUrl){
+                        attrs.siteUrl = _spPageContextInfo.webServerRelativeUrl;
+                    }
+                    else{
+                        window._spPageContextInfo = {};
+                        window._spPageContextInfo.webServerRelativeUrl = attrs.siteUrl = window.location.pathname.split("_catalogs")[0];
+                    }
+                }
 
             }
         };
